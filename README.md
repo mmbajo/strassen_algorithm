@@ -13,12 +13,12 @@ Below is the naive implementation of matrix multiplication. Because of the three
 ```python
 def multiply(A: List[List[float]], B: List[List[float]]):
     n = len(A)
-    C = [[0 for _ in range(n)] for _ in range[n]]
+    C = [[0 for _ in range(n)] for _ in range(n)]
     for i in range(n):
         for k in range(n):
             for j in range(n):
                 C[i][j] += A[i][k] * B[k][j]
-    return C[i][j]
+    return C
 ```
 
 # Divide-and-Conquer Algorithm
@@ -36,7 +36,7 @@ Implementing this in pseudo-code,
 ```python
 def multiply_matrix(A: List[List[float]], B: List[List[float]]) -> List[List[float]]:
     n = len(A)
-    C = [[0 for _ in range(n)] for _ in range[n]]
+    C = [[0 for _ in range(n)] for _ in range(n)]
     # Base case
     if n == 1:
         C[0][0] = A[0][0] * B[0][0]
@@ -85,7 +85,7 @@ Implementing this in pseudo-code, we get something like this:
 ```python
 def strassen_multiplication(A: List[List[float]], B: List[List[float]]) -> List[List[float]]:
     n = len(A)
-    C = [[0 for _ in range(n)] for _ in range[n]]
+    C = [[0 for _ in range(n)] for _ in range(n)]
     # Base case
     if n == 1:
         C[0][0] = A[0][0] * B[0][0]
@@ -125,7 +125,7 @@ def strassen_multiplication(A: List[List[float]], B: List[List[float]]) -> List[
         )
 
         # Calculate C submatrices
-        C_00 = add_matrix(
+        C_00 = subtract_matrix(
             add_matrix(p4, p5),
             subtract_matrix(p2, p6)
         )
@@ -145,7 +145,19 @@ def strassen_multiplication(A: List[List[float]], B: List[List[float]]) -> List[
 Since we have only 7 subproblems, by using Master Theorem, we have $T(N) = 7T(N/2) + O(N^2)$ which translates to time complexity $O(n^{log_2 7}) = O(n^{2.81})$. This is less than $O(n^3)$!
 
 # Experiments
-TBD
+Important points that I discovered as I was experimenting with the implemented algorithm are the following.
+* In multiplying small square matrices ($n<128$), I found out that the naive algorithm is the fastest. This might be because of the time it takes to fill in and calling the functions in the call stack when we do recursions. We can optimize the divide-and-conquer algorithm by changing the base case. Instead of base case being $n=1$, we can set it to $n<128$. Multiplying matrices with sizes the set value, we resort to using the naive algorithm.
+
+```python
+def strassen_multiplication(A: List[List[float]], B: List[List[float]], n_switch=128) -> List[List[float]]:
+    n = len(A)
+    C = [[0 for _ in range(n)] for _ in range(n)]
+    # Base case
+    if n <= n_switch:
+        C = multiply(A, B)
+    ...
+```
+*  
 
 # Conclusion
 In this article we have implemented Strassen Algorithm in pure python and experimented on its speed.
