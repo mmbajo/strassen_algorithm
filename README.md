@@ -5,7 +5,7 @@ Hi! This is Mark Bajo and I am here to share an algorithm for fast multiplicatio
 * Naive Algorithm
 * Divide-and-conquer Algorithm
 * Strassen Algorithm
-* Applications
+* Experiments
 * Conclusion
 
 # Naive Algorithm
@@ -158,6 +158,11 @@ def strassen_multiplication(A: List[List[float]], B: List[List[float]], n_switch
     ...
 ```
 * Below is a graph that shows how long it takes for each algorithm (naive, divide-and-conquer, and Strassen) to finish the inner product calculation.
+
+<p align="center">
+  <img src="assets/chart.png" />
+</p>
+
 
 # Conclusion
 In this article we have implemented Strassen Algorithm in pure python and experimented on its speed. Thanks to Strassen's Algorithm, we were able to shorten the time it takes to calculate the inner product between two matrices.
