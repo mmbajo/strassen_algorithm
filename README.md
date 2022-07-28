@@ -9,7 +9,7 @@ Hi! This is Mark Bajo and I am here to share an algorithm for fast multiplicatio
 * Conclusion
 
 # Naive Algorithm
-Below is the naive implementation of matrix multiplication. Because of the three `for` loops each running a calculation `n` times, we conclude that the naive solution runs at O(n^3).
+Below is the naive implementation of matrix multiplication. Because of the three `for` loops each running a calculation `n` times, we conclude that the naive solution runs at $O(n^3)$.
 ```python
 def multiply(A: List[List[float]], B: List[List[float]]):
     n = len(A)
@@ -157,7 +157,11 @@ def strassen_multiplication(A: List[List[float]], B: List[List[float]], n_switch
         C = multiply(A, B)
     ...
 ```
-*  
+* Below is a graph that shows how long it takes for each algorithm (naive, divide-and-conquer, and Strassen) to finish the inner product calculation.
 
 # Conclusion
-In this article we have implemented Strassen Algorithm in pure python and experimented on its speed.
+In this article we have implemented Strassen Algorithm in pure python and experimented on its speed. Thanks to Strassen's Algorithm, we were able to shorten the time it takes to calculate the inner product between two matrices.
+
+# References
+* Strassen, Volker (1969). "Gaussian Elimination is not Optimal". Numer. Math. 13 (4): 354–356. [doi:10.1007/BF02165411](https://link.springer.com/article/10.1007/BF02165411).
+* Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein. Introduction to Algorithms, Second Edition. MIT Press and McGraw-Hill, 2001. ISBN 0-262-03293-7. Chapter 28: Section 28.2: Strassen's algorithm for matrix multiplication, pp. 735–741.
